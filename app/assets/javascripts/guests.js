@@ -1,4 +1,7 @@
 $(function() {
+  var successMessage = 'Thanks for submitting! We will keep you up to date with the latest classes.';
+  var errorMessage = 'There was an error with your request. We are sorry.';
+
   $('#add-contact-btn').on('click', function() {
     var contactInfo = {
       contact: {
@@ -10,9 +13,19 @@ $(function() {
     };
 
     $.post('/contacts.json', contactInfo).done(function(response) {
-      $('#contact-form-card').html('Thanks for submitting! We will keep you up to date with the latest classes.');
+      $('#contact-form-card').html("<div class='alert alert-success'>" + successMessage + "</div>");
     }).fail(function(response) {
-      alert('There was an error with your request. We are sorry.');
+      if (response.status === 422) {
+        var responseErrors = response.responseJSON;
+        var errorHtml = "";
+        for (var errorKey in responseErrors) { 
+          errorHtml += "<span>" +  responseErrors[errorKey] + "</span>"
+        }
+        $('#contact-errors').html(errorHtml).show();
+        
+      } else {
+        $('#contact-errors').html(errorMessage).show();
+      }
     }); 
   });
 });
