@@ -57,11 +57,33 @@
 <br>
 
 <div class="row">
-  <div class="col">
+  <div class="col-md-9">
     <div class="card">
-      <div class="card-body">
+      <div id="contact-form-card" class="card-body">
         <h4 class="card-title">Want to sign up for class updates? Add your info here!</h4>
-        <%= render 'contacts/form' %>
+
+        <%= form_for(@contact) do |f| %>
+          <div class="form-group">
+            <%= f.label :name %><br>
+            <%= f.text_field :name, class: 'form-control' %>
+          </div>
+          <div class="form-group">
+            <%= f.label :email %><br>
+            <%= f.text_field :email, class: 'form-control' %>
+          </div>
+          <div class="form-group">
+            <%= f.label :telephone %><br>
+            <%= f.text_field :telephone, class: 'form-control' %>
+          </div>
+          <div class="form-group">
+            <%= f.label :mailing_address %><br>
+            <%= f.text_field :mailing_address, class: 'form-control' %>
+          </div>
+          <div class="actions">
+            <button type="button" id="add-contact-btn" class="btn btn-primary">Add me to the contact list!</button>
+          </div>
+        <% end %>
+
       </div>
     </div>
     
