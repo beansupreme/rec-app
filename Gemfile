@@ -23,6 +23,8 @@ gem 'jbuilder', '~> 2.0'
 
 gem 'bootstrap'
 
+gem 'devise'
+
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
@@ -40,7 +42,7 @@ group :development, :test do
 
   gem 'rspec-rails'
   gem 'sqlite3'
-  
+
 end
 
 group :production do
