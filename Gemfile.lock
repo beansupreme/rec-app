@@ -208,7 +208,7 @@ DEPENDENCIES
   devise
   jbuilder (~> 2.0)
   jquery-rails
-  pg (= 0.15.1)
+  pg
   puma
   rails (= 5.2.0)
   rails_12factor
