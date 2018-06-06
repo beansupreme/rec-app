@@ -33,20 +33,23 @@ describe 'Managing Contacts', type: :feature do
     expect(page).to have_content 'Listing Contacts'
   end
 
-  it 'allows management of contacts' do
+  it 'allows management of contacts', js: true do
     visit '/users/sign_in'
 
     login_user(bob)
 
     visit '/contacts'
 
-    expect(page).to have_content 'Evgeni Kuznetzov' 
-    expect(page).to have_content 'birdman@caps.com' 
+    contacts_table = find(:table, 'Contacts')
 
-    expect(page).to have_content 'Seth Jones'
-    expect(page).to have_content 'seth@cbj.com'
-    expect(page).to have_content '333-333-3333'
-    expect(page).to have_content 'Nationwide Arena'
+    expect(contacts_table).to have_table_row(
+      'Name' => 'Evgeni Kuznetzov', 'Email' => 'birdman@caps.com',
+      'Telephone' => '929-292-9292', 'Mailing address' => 'Bird nest'
+    )
+    expect(contacts_table).to have_table_row(
+      'Name' => 'Seth Jones', 'Email' => 'seth@cbj.com',
+      'Telephone' => '333-333-3333', 'Mailing address' => 'Nationwide Arena'
+    )
 
     expect(page).to have_content 'Alexander Ovechkin' 
     
@@ -67,13 +70,16 @@ describe 'Managing Contacts', type: :feature do
     expect(page).to have_content 'Name can\'t be blank'
 
     fill_in 'Name', with: 'Artemi Panarin'
-    fill_in 'Email', with: 'Breadman'
+    fill_in 'Email', with: 'Breadman@cbus.com'
     fill_in 'Telephone', with: '999-999-9999'
     fill_in 'Mailing address', with: 'LeVeque Tower'
 
     click_on 'Create Contact'
 
     visit '/contacts'
+    expect(contacts_table).to have_table_row(
+      'Name' => 'Artemi Panarin', 'Email' => 'Breadman@cbus.com'
+    )
 
     expect(page).to have_content('Breadman')
 
@@ -81,6 +87,8 @@ describe 'Managing Contacts', type: :feature do
     within(:table_row, {'Name' => 'Tom Wilson'}, {}) do
       click_on 'Destroy'
     end
+
+    accept_alert 
 
     visit '/contacts'
 

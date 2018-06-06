@@ -43,6 +43,7 @@ group :development, :test do
   gem 'capybara'
   gem 'capybara_table'
   gem 'sqlite3'
+  gem 'selenium-webdriver'
 end
 
 group :production do
