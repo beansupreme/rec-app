@@ -76,6 +76,15 @@ describe 'Managing Contacts', type: :feature do
     visit '/contacts'
 
     expect(page).to have_content('Breadman')
+
+
+    within(:table_row, {'Name' => 'Tom Wilson'}, {}) do
+      click_on 'Destroy'
+    end
+
+    visit '/contacts'
+
+    expect(page).not_to have_content('Tom Wilson')
   end
 
 end
