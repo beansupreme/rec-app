@@ -3,6 +3,14 @@ require "rails_helper"
 RSpec.describe ContactsController, type: :routing do
   describe "routing" do
 
+    it 'roots to guests#home' do
+      expect(:get => '/').to route_to('guests#home')
+    end
+
+    it 'routes to guests#home' do
+      expect(:get => 'guests/home').to route_to('guests#home')
+    end
+
     it "routes to #index" do
       expect(:get => "/contacts").to route_to("contacts#index")
     end
