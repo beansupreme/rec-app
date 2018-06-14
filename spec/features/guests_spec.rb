@@ -15,6 +15,30 @@ describe 'visiting the home page' do
       fill_in 'Email', with: 'wontyoubemyfriend@gmail.com'
       fill_in 'Telephone', with: '123-456-8912'
       fill_in 'Mailing address', with: 'Mister Rogers\' Neighborhood'
+
+      click_on 'Add me to the contact list!'
+      expect(page).to have_content('Thanks for submitting your info!')
+
+      mr_rogers = Contact.find_by_name('Mister Rogers')
+      expect(mr_rogers).to be_present
+    end
+
+    within('#add-contact-form') do
+      # click_on 'Add me to the contact list!'
+
+      # expect(page).to have_content('Name can\'t be blank')
+
+      fill_in 'Name', with: 'Georgie'
+      fill_in 'Email', with: 'cgeorgie@gmail.com'
+      fill_in 'Telephone', with: '231-123-4124'
+      fill_in 'Mailing Address', with: 'Kyle\'s old friend'
+
+      click_on 'Add my contact info'
+
+      # expect(page).to have_content('Thanks for submitting your info!')
+
+      # georgie = Contact.find_by_name('Georgie')
+      # expect(georgie).to be_present
     end
   end
 end

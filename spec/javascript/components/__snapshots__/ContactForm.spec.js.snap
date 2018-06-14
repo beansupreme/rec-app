@@ -2,10 +2,93 @@
 
 exports[`<ContactForm/> renders as expected 1`] = `
 <div
-  id="contact-form"
+  className="card"
 >
-  <h4>
-    Add your info for class updates!
-  </h4>
+  <div
+    className="card-body"
+    id="contact-form"
+  >
+    <h4
+      className="card-title"
+    >
+      Add your info for class updates!
+    </h4>
+    <form
+      className="new_contact"
+      id="add-contact-form"
+    >
+      <div
+        className="form-group"
+      >
+        <label
+          htmlFor="contact_name_field"
+        >
+          Name
+        </label>
+        <input
+          className="form-control"
+          id="contact_name_field"
+          name="contact[name]"
+          type="text"
+        />
+      </div>
+      <div
+        className="form-group"
+      >
+        <label
+          htmlFor="contact_email_field"
+        >
+          Email
+        </label>
+        <input
+          className="form-control"
+          id="contact_email_field"
+          name="contact[email]"
+          type="text"
+        />
+      </div>
+      <div
+        className="form-group"
+      >
+        <label
+          htmlFor="contact_telephone_field"
+        >
+          Telephone
+        </label>
+        <input
+          className="form-control"
+          id="contact_telephone_field"
+          name="contact[telephone]"
+          type="text"
+        />
+      </div>
+      <div
+        className="form-group"
+      >
+        <label
+          htmlFor="contact_mailing_address_field"
+        >
+          Mailing Address
+        </label>
+        <input
+          className="form-control"
+          id="contact_mailing_address_field"
+          name="contact[mailing_address]"
+          type="text"
+        />
+      </div>
+      <div
+        className="actions"
+      >
+        <button
+          className="btn btn-primary"
+          id="add-contact-info-btn"
+          type="button"
+        >
+          Add my contact info
+        </button>
+      </div>
+    </form>
+  </div>
 </div>
 `;
