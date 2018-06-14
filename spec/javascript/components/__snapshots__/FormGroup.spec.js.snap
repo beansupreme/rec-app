@@ -1,0 +1,19 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<FormGroup /> renders as expected 1`] = `
+<div
+  className="form-group"
+>
+  <label
+    htmlFor="field_name"
+  >
+    Fill this out!
+  </label>
+  <input
+    className="form-control"
+    id="field_name"
+    name="custom_form[field]"
+    type="text"
+  />
+</div>
+`;

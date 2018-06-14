@@ -1,4 +1,5 @@
 import React from "react"
+import FormGroup from './FormGroup'
 
 class ContactForm extends React.Component {
   render() {
@@ -7,22 +8,22 @@ class ContactForm extends React.Component {
         <div id="contact-form" className="card-body">
           <h4 className="card-title">Add your info for class updates!</h4>
           <form id="add-contact-form" className="new_contact">
-            <div className="form-group">
-              <label htmlFor="contact_name_field">Name</label>
-              <input id="contact_name_field" className="form-control" type="text" name="contact[name]"/>
-            </div>
-            <div className="form-group">
-              <label htmlFor="contact_email_field">Email</label>
-              <input id="contact_email_field" className="form-control" type="text" name="contact[email]"/>
-            </div>
-            <div className="form-group">
-              <label htmlFor="contact_telephone_field">Telephone</label>
-              <input id="contact_telephone_field" className="form-control" type="text" name="contact[telephone]"/>
-            </div>
-            <div className="form-group">
-              <label htmlFor="contact_mailing_address_field">Mailing Address</label>
-              <input id="contact_mailing_address_field" className="form-control" type="text" name="contact[mailing_address]"/>
-            </div>
+            <FormGroup 
+              inputId="contact_name_field" type="text"
+              formName="contact[name]" labelText="Name"
+            />
+            <FormGroup 
+              inputId="contact_email_field" type="text"
+              formName="contact[email]" labelText="Email"
+            />
+            <FormGroup 
+              inputId="contact_telephone_field" type="text"
+              formName="contact[telephone]" labelText="Telephone"
+            />
+            <FormGroup 
+              inputId="contact_mailing_address_field" type="text"
+              formName="contact[mailing_address]" labelText="Mailing Address"
+            />
             <div className="actions">
               <button type="button" id="add-contact-info-btn" className="btn btn-primary">
                 Add my contact info
