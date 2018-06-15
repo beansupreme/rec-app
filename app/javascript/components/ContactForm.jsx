@@ -9,20 +9,20 @@ class ContactForm extends React.Component {
           <h4 className="card-title">Add your info for class updates!</h4>
           <form id="add-contact-form" className="new_contact">
             <FormGroup 
-              inputId="contact_name_field" type="text"
-              formName="contact[name]" labelText="Name"
+              labelText="Name"
+              inputId="contact_name_field" inputName="contact[name]"
             />
             <FormGroup 
-              inputId="contact_email_field" type="text"
-              formName="contact[email]" labelText="Email"
+              labelText="Email"
+              inputId="contact_email_field" inputName="contact[email]"
             />
             <FormGroup 
-              inputId="contact_telephone_field" type="text"
-              formName="contact[telephone]" labelText="Telephone"
+              labelText="Telephone"
+              inputId="contact_telephone_field" inputName="contact[telephone]"
             />
             <FormGroup 
-              inputId="contact_mailing_address_field" type="text"
-              formName="contact[mailing_address]" labelText="Mailing Address"
+              labelText="Mailing Address"
+              inputId="contact_mailing_address_field" inputName="contact[mailing_address]"
             />
             <div className="actions">
               <button type="button" id="add-contact-info-btn" className="btn btn-primary">

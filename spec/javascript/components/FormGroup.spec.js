@@ -8,7 +8,7 @@ describe('<FormGroup />', () => {
   it('renders a form group label with the label name', () => {
     const wrapper = shallow(
       <FormGroup inputId="important_field"
-      formName="custom_form[field]" labelText="Important Field" />
+      inputName="custom_form[field]" labelText="Important Field" />
     );
     expect(wrapper.text()).toContain('Important Field')
   });
@@ -16,23 +16,31 @@ describe('<FormGroup />', () => {
   it('renders as expected', () => {
     const tree = renderer.create(
       <FormGroup inputId="field_name"
-      formName="custom_form[field]" labelText="Fill this out!"/>
+      inputName="custom_form[field]" labelText="Fill this out!"/>
     ).toJSON();
     expect(tree).toMatchSnapshot();
   });
 
   it("uses 'text' as the default type", () => {
     const wrapper = mount(
-      <FormGroup inputId="my-input" formName="something" labelText="Look!" />
+      <FormGroup inputId="my-input" inputName="something" labelText="Look!" />
     );
     expect(wrapper.find('input')).toHaveProp('type', 'text');
   });
 
   it("allows for setting a custom type", () => {
     const wrapper = mount(
-      <FormGroup inputId="my-number-input" formName="something" 
+      <FormGroup inputId="my-number-input" inputName="something" 
       labelText="Number here" inputType="number" />
     );
     expect(wrapper.find('input')).toHaveProp('type', 'number');
+  });
+
+  it("renders the label as expected", () => {
+    const wrapper = shallow(
+      <FormGroup inputId="my-input" formName="something" 
+      labelText="Look at this label!" />
+    );
+    expect(wrapper.find('label')).toHaveText('Look at this label!')
   });
 });
