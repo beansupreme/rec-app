@@ -33,12 +33,12 @@ describe 'visiting the home page' do
       fill_in 'Telephone', with: '231-123-4124'
       fill_in 'Mailing Address', with: 'Kyle\'s old friend'
 
-      click_on 'Add my contact info'
+      click_on 'Add Contact info'
 
       # expect(page).to have_content('Thanks for submitting your info!')
 
-      # georgie = Contact.find_by_name('Georgie')
-      # expect(georgie).to be_present
+      georgie = Contact.find_by_name('Georgie')
+      expect(georgie).to be_present
     end
   end
 end

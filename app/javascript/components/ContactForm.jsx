@@ -1,33 +1,81 @@
 import React from "react"
 import FormGroup from './FormGroup'
+import axios from "axios"
 
 class ContactForm extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      name: '',
+      email: '',
+      telephone: '',
+      mailing_address: ''
+    }
+
+    this.handleSubmit = this.handleSubmit.bind(this);
+    this.updateField = this.updateField.bind(this);
+    this.updateAddress = this.updateAddress.bind(this);
+  }
+
+  handleSubmit(event) {
+    console.log('form was submitted');
+    console.log(this.state)
+    event.preventDefault();
+    axios.post(
+      '/contacts.json',
+      {
+        contact: {
+          name: this.state.name,
+          email: this.state.email,
+          telephone: this.state.telephone,
+          mailing_address: this.state.mailing_address
+        }        
+      }
+    ).then(response => {
+      console.log('server responded with:')
+      console.log(response)
+      alert('Thanks for adding your info!');
+    }).catch(error => {
+      console.log(error)
+    })
+  }
+
+  updateAddress(event) { 
+    this.setState({mailing_address: event.target.value})
+  }
+
+  updateField(event) {
+    let fieldName = event.target.id.split('_')[1];
+    let fieldsToUpdate = {};
+    fieldsToUpdate[fieldName] = event.target.value;
+    this.setState(fieldsToUpdate);
+  }
+
   render() {
     return (
       <div className="card">
         <div id="contact-form" className="card-body">
           <h4 className="card-title">Add your info for class updates!</h4>
-          <form id="add-contact-form" className="new_contact">
+          <form id="add-contact-form" className="new_contact" onSubmit={this.handleSubmit}>
             <FormGroup 
-              labelText="Name"
-              inputId="contact_name_field" inputName="contact[name]"
+              labelText="Name" onChange={this.updateField}
+              inputId="contact_name_field" inputName="contact[name]" autoComplete="name"
             />
             <FormGroup 
-              labelText="Email"
-              inputId="contact_email_field" inputName="contact[email]"
+              labelText="Email" onChange={this.updateField}
+              inputId="contact_email_field" inputName="contact[email]" autoComplete="email"
             />
             <FormGroup 
-              labelText="Telephone"
-              inputId="contact_telephone_field" inputName="contact[telephone]"
+              labelText="Telephone" onChange={this.updateField}
+              inputId="contact_telephone_field" inputName="contact[telephone]" autoComplete="tel"
             />
             <FormGroup 
-              labelText="Mailing Address"
-              inputId="contact_mailing_address_field" inputName="contact[mailing_address]"
+              labelText="Mailing Address" onChange={this.updateAddress}
+              inputId="contact_mailing_address_field" inputName="contact[mailing_address]" autoComplete="address-line1"
             />
             <div className="actions">
-              <button type="button" id="add-contact-info-btn" className="btn btn-primary">
-                Add my contact info
-              </button>
+              <input type="submit" value="Add Contact info" className="btn btn-primary"/>
             </div>
           </form>
         </div>

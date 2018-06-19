@@ -10,9 +10,11 @@ exports[`<FormGroup /> renders as expected 1`] = `
     Fill this out!
   </label>
   <input
+    autoComplete="on"
     className="form-control"
     id="field_name"
     name="custom_form[field]"
+    onChange={[Function]}
     type="text"
   />
 </div>

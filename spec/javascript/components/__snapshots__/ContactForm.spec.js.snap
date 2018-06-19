@@ -16,6 +16,7 @@ exports[`<ContactForm/> renders as expected 1`] = `
     <form
       className="new_contact"
       id="add-contact-form"
+      onSubmit={[Function]}
     >
       <div
         className="form-group"
@@ -26,9 +27,11 @@ exports[`<ContactForm/> renders as expected 1`] = `
           Name
         </label>
         <input
+          autoComplete="name"
           className="form-control"
           id="contact_name_field"
           name="contact[name]"
+          onChange={[Function]}
           type="text"
         />
       </div>
@@ -41,9 +44,11 @@ exports[`<ContactForm/> renders as expected 1`] = `
           Email
         </label>
         <input
+          autoComplete="email"
           className="form-control"
           id="contact_email_field"
           name="contact[email]"
+          onChange={[Function]}
           type="text"
         />
       </div>
@@ -56,9 +61,11 @@ exports[`<ContactForm/> renders as expected 1`] = `
           Telephone
         </label>
         <input
+          autoComplete="tel"
           className="form-control"
           id="contact_telephone_field"
           name="contact[telephone]"
+          onChange={[Function]}
           type="text"
         />
       </div>
@@ -71,22 +78,22 @@ exports[`<ContactForm/> renders as expected 1`] = `
           Mailing Address
         </label>
         <input
+          autoComplete="address-line1"
           className="form-control"
           id="contact_mailing_address_field"
           name="contact[mailing_address]"
+          onChange={[Function]}
           type="text"
         />
       </div>
       <div
         className="actions"
       >
-        <button
+        <input
           className="btn btn-primary"
-          id="add-contact-info-btn"
-          type="button"
-        >
-          Add my contact info
-        </button>
+          type="submit"
+          value="Add Contact info"
+        />
       </div>
     </form>
   </div>

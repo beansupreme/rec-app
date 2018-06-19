@@ -1,5 +1,7 @@
 class ContactsController < ApplicationController
   before_action :authenticate_user!, except: [:create]
+  skip_before_action :verify_authenticity_token, only: [:create]
+
   before_action :set_contact, only: [:show, :edit, :update, :destroy]
 
   # GET /contacts

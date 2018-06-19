@@ -7,6 +7,7 @@ class FormGroup extends React.Component {
         <label htmlFor={this.props.inputId}>{this.props.labelText}</label>
         <input id={this.props.inputId} className="form-control" 
           type={this.props.inputType} name={this.props.inputName}
+          onChange={this.props.onChange} autoComplete={this.props.autoComplete}
         />
       </div>
     )
@@ -14,7 +15,9 @@ class FormGroup extends React.Component {
 }
 
 FormGroup.defaultProps = {
-  inputType: "text"
+  inputType: "text",
+  onChange: () => {},
+  autoComplete: "on"
 }
 
 export default FormGroup;

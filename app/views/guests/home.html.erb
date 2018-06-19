@@ -67,19 +67,20 @@
 
           <div class="form-group">
             <%= f.label :name %><br>
-            <%= f.text_field :name, class: 'form-control' %>
+            <%= f.text_field :name, class: 'form-control', autocomplete: 'name' %>
           </div>
           <div class="form-group">
             <%= f.label :email %><br>
-            <%= f.text_field :email, class: 'form-control' %>
+            <%= f.text_field :email, class: 'form-control', autocomplete: 'email' %>
           </div>
           <div class="form-group">
             <%= f.label :telephone %><br>
-            <%= f.text_field :telephone, class: 'form-control' %>
+            <%= f.text_field :telephone, class: 'form-control',
+            autocomplete: 'email' %>
           </div>
           <div class="form-group">
             <%= f.label :mailing_address %><br>
-            <%= f.text_field :mailing_address, class: 'form-control' %>
+            <%= f.text_field :mailing_address, class: 'form-control', autocomplete: 'address-line1' %>
           </div>
           <div class="actions">
             <button type="button" id="add-contact-btn" class="btn btn-primary">Add me to the contact list!</button>
