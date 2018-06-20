@@ -42,6 +42,7 @@ class ContactForm extends React.Component {
   }
 
   updateAddress(event) { 
+    console.log('update address called!')
     this.setState({mailing_address: event.target.value})
   }
 
@@ -75,7 +76,7 @@ class ContactForm extends React.Component {
               inputId="contact_mailing_address_field" inputName="contact[mailing_address]" autoComplete="address-line1"
             />
             <div className="actions">
-              <input type="submit" value="Add Contact info" className="btn btn-primary"/>
+              <input type="submit" id="add_contact_submit" value="Add Contact info" className="btn btn-primary"/>
             </div>
           </form>
         </div>

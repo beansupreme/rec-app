@@ -91,6 +91,7 @@ exports[`<ContactForm/> renders as expected 1`] = `
       >
         <input
           className="btn btn-primary"
+          id="add_contact_submit"
           type="submit"
           value="Add Contact info"
         />
