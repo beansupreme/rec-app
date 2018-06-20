@@ -5,10 +5,17 @@ import ContactForm from 'components/ContactForm';
 import FormGroup from 'components/FormGroup';
 
 import renderer from 'react-test-renderer';
-import sinon from 'sinon'
-import axios from 'axios'
+import sinon from 'sinon';
+import axios from 'axios';
+import moxios from 'moxios';
 
 describe('<ContactForm/>', () => {
+  beforeEach(function() {
+    moxios.install();
+  });
+  afterEach(function() {
+    moxios.uninstall()
+  })
   it('shows a greeting message', () => {
     const wrapper = render(<ContactForm />);
     expect(wrapper.text()).toContain('Add your info for class updates!');
@@ -56,12 +63,12 @@ describe('<ContactForm/>', () => {
     };
 
     let postData = axios.post.getCall(0).args;
-    console.log(postData)
+    
     expect(postData[0]).toEqual('/contacts.json');
     expect(postData[1]).toEqual(expectedPostBody);
 
 
-    // axios.post.restore();
+    axios.post.restore();
   });
 
   it('updates state when the inputs are changed', () => {
@@ -78,10 +85,42 @@ describe('<ContactForm/>', () => {
       name: 'Kermit',
       email: 'kthefrog@gmail.com',
       telephone: '666-122-4233',
-      mailing_address: '123 Sesame St'
+      mailing_address: '123 Sesame St',
+      errors: []
     }
     expect(state).toEqual(expectedState)
   });
+
+  it('renders errors on the page if the create contact call fails', () => {
+    moxios.stubRequest('/contacts.json', {
+      status: 422,
+      response: ["Name can't be blank"]
+    })
+    
+    const wrapper = mount(<ContactForm />);
+
+    wrapper.find('#add-contact-form').first().simulate('submit');
+
+    // moxios.wait(function() {
+    //   let request = moxios.requests.mostRecent();
+
+    //   expect(request).toEqual({})
+    //   request.respondWith({
+    //     status: 422,
+    //     response: ["Name can't be blank"]
+    //   }).then(function() {
+    //     console.log('got here!!!!!')
+    //     expect(wrapper.find('#contact-form-errors').toIncludeText("Name can't be blank"));
+    //     done();
+    //   });
+
+    // });
+    console.log(wrapper.find('#contact-form-errors').first().html())
+    expect(wrapper.find('#contact-form-errors').first()).toIncludeText("Name can't be blank");
+    console.log('did this really work')
+    
+  });
+
 });
 
 function updateInput(wrapper, inputId, value) {

@@ -19,6 +19,11 @@ exports[`<ContactForm/> renders as expected 1`] = `
       onSubmit={[Function]}
     >
       <div
+        className="alert alert-danger"
+        id="contact-form-errors"
+        role="alert"
+      />
+      <div
         className="form-group"
       >
         <label

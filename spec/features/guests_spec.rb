@@ -24,9 +24,9 @@ describe 'visiting the home page' do
     end
 
     within('#add-contact-form') do
-      # click_on 'Add me to the contact list!'
+      click_on 'Add Contact info'
 
-      # expect(page).to have_content('Name can\'t be blank')
+      expect(page).to have_content('Name can\'t be blank')
 
       fill_in 'Name', with: 'Georgie'
       fill_in 'Email', with: 'cgeorgie@gmail.com'
