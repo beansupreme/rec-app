@@ -19,8 +19,6 @@ class ContactForm extends React.Component {
   }
 
   handleSubmit(event) {
-    console.log('form was submitted');
-    console.log(this.state)
     event.preventDefault();
     axios.post(
       '/contacts.json',
@@ -42,7 +40,6 @@ class ContactForm extends React.Component {
   }
 
   updateAddress(event) { 
-    console.log('update address called!')
     this.setState({mailing_address: event.target.value})
   }
 

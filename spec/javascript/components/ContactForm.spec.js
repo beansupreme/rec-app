@@ -30,24 +30,17 @@ describe('<ContactForm/>', () => {
     expect(wrapper.find(FormGroup)).toHaveLength(4)
   });
 
-  it('sets state for address when changed', () => {
-    const wrapper = mount(<ContactForm />);
-
-    wrapper.find('#contact_name_field').simulate('change', 'Arya');
-
-
-    console.log(wrapper.state.mailing_address)
-  });
-
-  it('posts the expected values to the contacts create endpoint', () => {
+  it('posts the state to the contacts create endpoint on submit', () => {
     sinon.spy(axios, 'post');
 
     const wrapper = mount(<ContactForm />);
+    wrapper.setState({
+      name: 'Arya',
+      email: 'noone@gmail.com',
+      telephone: '',
+      mailing_address: 'Hidden temple in Braavos'
+    });
 
-    wrapper.find('#contact_name_field').simulate('change', 'Arya');    
-    wrapper.find('#contact_email_field').simulate('change', 'noone@gmail.com');    
-    wrapper.find('#contact_telephone_field').simulate('change', '');    
-    wrapper.find('#contact_mailing_address_field').simulate('change', 'Hidden temple in Braavos');    
 
     wrapper.find('#add-contact-form').first().simulate('submit');
 
@@ -59,10 +52,8 @@ describe('<ContactForm/>', () => {
         email: 'noone@gmail.com',
         telephone: '',
         mailing_address: 'Hidden temple in Braavos'
-      }
+      } 
     };
-
-    expect(wrapper.state().email).toEqual('foo')
 
     let postData = axios.post.getCall(0).args;
     console.log(postData)
@@ -70,6 +61,30 @@ describe('<ContactForm/>', () => {
     expect(postData[1]).toEqual(expectedPostBody);
 
 
-    axios.post.restore();
+    // axios.post.restore();
+  });
+
+  it('updates state when the inputs are changed', () => {
+    const wrapper = mount(<ContactForm />);
+
+    updateInput(wrapper, 'contact_name_field', 'Kermit');
+    updateInput(wrapper, 'contact_email_field', 'kthefrog@gmail.com');
+    updateInput(wrapper, 'contact_telephone_field', '666-122-4233');
+    updateInput(wrapper, 'contact_mailing_address_field', '123 Sesame St');
+
+
+    let state = wrapper.state();
+    const expectedState = {
+      name: 'Kermit',
+      email: 'kthefrog@gmail.com',
+      telephone: '666-122-4233',
+      mailing_address: '123 Sesame St'
+    }
+    expect(state).toEqual(expectedState)
   });
 });
+
+function updateInput(wrapper, inputId, value) {
+  let input = wrapper.find('#' + inputId).first();
+  input.simulate('change', { target: { id: inputId, value: value }});
+}
