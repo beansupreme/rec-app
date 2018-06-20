@@ -1,4 +1,10 @@
 {
+  "name": "rec-app",
+  "version": "1.0.0",
+  "engines": {
+    "node": "10.4.0",
+    "yarn": "1.4.0"
+  },
   "dependencies": {
     "@rails/webpacker": "3.5",
     "ajv": "^6.5.1",
