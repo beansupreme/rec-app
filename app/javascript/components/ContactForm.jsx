@@ -1,6 +1,7 @@
 import React from "react"
 import FormGroup from './FormGroup'
 import ErrorList from './ErrorList'
+import MessageBox from './MessageBox'
 import axios from "axios"
 
 class ContactForm extends React.Component {
@@ -40,7 +41,10 @@ class ContactForm extends React.Component {
     }).catch(error => {
       let response = error.response;
       if (response.status === 422) {
-        this.setState({errors: response.data});
+        this.setState({
+          errors: response.data,
+          message: ''
+        });
       }
     })
   }
@@ -63,9 +67,7 @@ class ContactForm extends React.Component {
           <h4 className="card-title">Add your info for class updates!</h4>
           <form id="add-contact-form" className="new_contact" onSubmit={this.handleSubmit}>
             <ErrorList id="contact-form-errors" errors={this.state.errors} />
-            <div id="contact-form-message"  className="alert alert-success" role="alert" >
-              {this.state.message}
-            </div>
+            <MessageBox id="contact-form-message" message={this.state.message} />
             <FormGroup 
               labelText="Name" onChange={this.updateField}
               inputId="contact_name_field" inputName="contact[name]" autoComplete="name"

@@ -93,12 +93,18 @@ describe('<ContactForm/>', () => {
 
   it('renders errors on the page if the create contact call fails', function (done) {
     const wrapper = mount(<ContactForm />);
+
+    wrapper.setState({
+      message: 'Thanks for submitting your info!'
+    });
+
     moxios.stubRequest('/contacts.json', {
       status: 422,
       response: ["Name can't be blank"],
     });
 
     moxios.wait(function () {
+      expect(wrapper.find('#contact-form-message').first()).toHaveHTML('<div></div>');
       expect(wrapper.find('#contact-form-errors').first()).toIncludeText("Name can't be blank");
       done()
     });
@@ -125,6 +131,7 @@ describe('<ContactForm/>', () => {
 
     moxios.wait(function () {
       expect(wrapper.find('#contact-form-message').first()).toIncludeText('Thanks for adding your info!');
+      expect(wrapper.find('#contact-form-errors')).toHaveHTML('<div></div>');
       done()
     })
 
