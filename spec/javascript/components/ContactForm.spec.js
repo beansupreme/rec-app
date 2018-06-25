@@ -91,36 +91,45 @@ describe('<ContactForm/>', () => {
     expect(state).toEqual(expectedState)
   });
 
-  it('renders errors on the page if the create contact call fails', () => {
+  it('renders errors on the page if the create contact call fails', function (done) {
+    const wrapper = mount(<ContactForm />);
     moxios.stubRequest('/contacts.json', {
       status: 422,
-      response: ["Name can't be blank"]
-    })
-    
-    const wrapper = mount(<ContactForm />);
+      response: ["Name can't be blank"],
+    });
+
+    moxios.wait(function () {
+      expect(wrapper.find('#contact-form-errors').first()).toIncludeText("Name can't be blank");
+      done()
+    });
 
     wrapper.find('#add-contact-form').first().simulate('submit');
-
-    // moxios.wait(function() {
-    //   let request = moxios.requests.mostRecent();
-
-    //   expect(request).toEqual({})
-    //   request.respondWith({
-    //     status: 422,
-    //     response: ["Name can't be blank"]
-    //   }).then(function() {
-    //     console.log('got here!!!!!')
-    //     expect(wrapper.find('#contact-form-errors').toIncludeText("Name can't be blank"));
-    //     done();
-    //   });
-
-    // });
-    console.log(wrapper.find('#contact-form-errors').first().html())
-    expect(wrapper.find('#contact-form-errors').first()).toIncludeText("Name can't be blank");
-    console.log('did this really work')
-    
   });
 
+  it('displays a success message if create contact succeeds', function(done) {
+    const wrapper = mount(<ContactForm />);
+    const successfulPostResponse = {
+      id: 5,
+      name: 'Kermit',
+      email: 'kthefrog@gmail.com',
+      telephone: '666-122-4233',
+      mailing_address: '123 Sesame St',
+      createdAt: "2018-06-25T14:44:31.990Z",
+      updatedAt: "2018-06-25T14:44:31.990Z"
+    }
+
+    moxios.stubRequest('/contacts.json', {
+      status: 200,
+      response: successfulPostResponse
+    })
+
+    moxios.wait(function () {
+      expect(wrapper.find('#contact-form-message').first()).toIncludeText('Thanks for adding your info!');
+      done()
+    })
+
+    wrapper.find('#add-contact-form').first().simulate('submit');    
+  });
 });
 
 function updateInput(wrapper, inputId, value) {

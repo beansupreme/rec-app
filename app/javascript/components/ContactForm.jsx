@@ -33,10 +33,10 @@ class ContactForm extends React.Component {
         }        
       }
     ).then(response => {
-      this.setState({errors: []})
-      console.log('server responded with:')
-      console.log(response)
-      alert('Thanks for adding your info!');
+      this.setState({
+        errors: [],
+        message: 'Thanks for adding your info!',
+      });
     }).catch(error => {
       let response = error.response;
       if (response.status === 422) {
@@ -63,6 +63,9 @@ class ContactForm extends React.Component {
           <h4 className="card-title">Add your info for class updates!</h4>
           <form id="add-contact-form" className="new_contact" onSubmit={this.handleSubmit}>
             <ErrorList id="contact-form-errors" errors={this.state.errors} />
+            <div id="contact-form-message"  className="alert alert-success" role="alert" >
+              {this.state.message}
+            </div>
             <FormGroup 
               labelText="Name" onChange={this.updateField}
               inputId="contact_name_field" inputName="contact[name]" autoComplete="name"

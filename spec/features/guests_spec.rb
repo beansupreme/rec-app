@@ -35,7 +35,8 @@ describe 'visiting the home page' do
 
       click_on 'Add Contact info'
 
-      # expect(page).to have_content('Thanks for submitting your info!')
+      expect(page).not_to have_content('Name can\'t be blank')
+      expect(page).to have_content('Thanks for adding your info!')
 
       georgie = Contact.find_by_name('Georgie')
       expect(georgie).to be_present

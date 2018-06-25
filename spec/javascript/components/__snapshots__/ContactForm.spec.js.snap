@@ -24,6 +24,11 @@ exports[`<ContactForm/> renders as expected 1`] = `
         role="alert"
       />
       <div
+        className="alert alert-success"
+        id="contact-form-message"
+        role="alert"
+      />
+      <div
         className="form-group"
       >
         <label
